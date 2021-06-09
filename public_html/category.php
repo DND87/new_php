@@ -1,23 +1,14 @@
 <?php
-$servername = "mysql";
-$username = "root";
-$password = "rootpassword";
-$dbname = "hoa_xuan";
-
-// Create connection
-$conn = mysqli_connect($servername, $username, $password, $dbname);
-// Check connection
-if (!$conn) {
-  die("Connection failed: " . mysqli_connect_error());
-}
-
+include 'connect_db.php';
 $sql = "SELECT * FROM category";
 $result = mysqli_query($conn, $sql);
 
 if (mysqli_num_rows($result) > 0) {
   // output data of each row
-
 ?>
+<br>
+<a href="create_category.php">Add new</a>
+<br><br>
 <style>
 table, th, td {
   border: 1px solid black;
@@ -34,7 +25,7 @@ table, th, td {
 ?>
   <tr>
     <td><?php echo $row["id"];?></td>
-    <td><?php echo $row["name"];?></td>
+    <td><a href="product.php?cate_id=<?php echo $row['id']; ?>"><?php echo $row["name"];?></a></td>
   </tr>
 <?php
 }
