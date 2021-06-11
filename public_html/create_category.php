@@ -1,13 +1,15 @@
 <?php
 include 'connect_db.php';
-$cate_name = $_GET['cate_name'];
-$sql = "INSERT INTO category(name) VALUES ('$cate_name')";
-if ($conn->query($sql) === TRUE) {
-  echo "New category created successfully";
-} else {
-  echo "Error: " . $sql . "<br>" . $conn->error;
-}
 
+if(!empty($_GET['cate_name'])){
+	$cate_name = $_GET['cate_name'];
+	$sql = "INSERT INTO category(name) VALUES ('$cate_name')";
+ 	if ($conn->query($sql) === TRUE) {
+  		echo "New category created successfully";
+	} else {
+  		echo "Error: " . $sql . "<br>" . $conn->error;
+	}
+}
 
 ?>
 
