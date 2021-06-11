@@ -1,15 +1,23 @@
 <?php
 include 'connect_db.php';
 $cate_id = $_GET['cate_id'];
-$sql = "SELECT *, product.name as product_name  FROM product
-inner join category on product.category_id = category.id
-where category_id = $cate_id" ;
+if(!empty($cate_id)){
+  $sql = "SELECT *, product.name as product_name  FROM product
+  inner join category on product.category_id = category.id
+  where category_id = $cate_id" ;
+} else{
+  $sql = "SELECT *, product.name as product_name  FROM product
+  inner join category on product.category_id = category.id";
+}
 $result = mysqli_query($conn, $sql);
+
 
 if (mysqli_num_rows($result) > 0) {
   // output data of each row
-
 ?>
+<br>
+<a href="create_product.php">Add new</a>
+<br><br>
 <style>
 table, th, td {
   border: 1px solid black;
