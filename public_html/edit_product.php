@@ -1,5 +1,18 @@
 <?php
 include 'connect_db.php';
+if(!empty($_GET['update'])){
+  $prod_name = $_GET['prod_name'];
+  $cate_id = $_GET['cate_id'];
+  $price = $_GET['price'];
+  $unit = $_GET['unit'];
+  $prod_id = $_GET['id'];
+  $sql = "UPDATE product SET name='$prod_name', category_id=$cate_id, price=$price, unit='$unit' WHERE id=$prod_id";
+  if ($conn->query($sql) === TRUE) {
+      echo "Updated successfully";
+  } else {
+      echo "Error: " . $sql . "<br>" . $conn->error;
+  }
+}
 if(!empty($_GET['id'])){
   $prod_id = $_GET['id'];
   $sql = "SELECT * FROM product WHERE id=$prod_id";
@@ -25,6 +38,7 @@ $result = mysqli_query($conn, $sql);
 <h2>Edit product</h2>
 
 <form action="">
+  <input type="hidden" name="id" value="<?php echo $prod['id']?>">
   <label for="pname">Product name:</label><br>
   <input type="text" id="pname" name="prod_name" value="<?php echo $prod['name']?>"><br>
   <label for="cname">Category name:</label><br>
@@ -47,7 +61,7 @@ $result = mysqli_query($conn, $sql);
   <input type="text" id="prname" name="price" value="<?php echo $prod['price']?>"><br>
   <label for="uname">Unit:</label><br>
   <input type="text" id="uname" name="unit" value="<?php echo $prod['unit']?>"><br>
-  <input type="submit" value="Save">
+  <input type="submit" name="update" value="Update">
 </form> 
 <br>
 <a href="product.php">Back to Product list</a>
