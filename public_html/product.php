@@ -17,6 +17,9 @@ if (mysqli_num_rows($result) > 0) {
 ?>
 <br>
 <a href="create_product.php">Add new</a>
+<br>
+<div style="color: red;"><?php echo $_GET['msg'] ?> </div>
+<br>
 <br><br>
 <style>
 table, th, td {
@@ -43,7 +46,8 @@ table, th, td {
     <td><?php echo $row["price"];?></td>
     <td><?php echo $row["unit"];?></td>
     <td><a href="edit_product.php?id=<?php echo $row["id"];?>">Sửa</a></td>
-    <td>Xóa</a></td>
+    <td><a href="delete_product.php?id=<?php echo $row["id"];?>" onclick="return confirm('Are you sure?')">Xóa</a></td>
+
   </tr>
 <?php
 }
